@@ -11,7 +11,7 @@ export const handleUserLogin: ResolverFn = async (
   info
 ) => {
   const { username, password } = args;
-  // getLogger().info({ parent, args, context, info });
+  getLogger().info({ parent, args, context, info });
   const user = await User.findOne({ where: { username } });
   try {
     if (!user) {
