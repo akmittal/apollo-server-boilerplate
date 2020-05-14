@@ -8,18 +8,6 @@ import {
 } from "typeorm";
 import { hashSync } from "bcrypt";
 
-interface IUser {
-  firstName: string;
-
-  lastName: string;
-
-  email: string;
-
-  username: string;
-
-  password: string;
-}
-
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -53,10 +41,10 @@ export class User extends BaseEntity {
     this.email = email;
   }
   @BeforeInsert()
-  hashPassword() {
+  hashPassword(): void {
     this.password = hashSync(this.password, 2);
   }
-  toJSON() {
+  toJSON(): object {
     return {
       id: this.id,
       firstName: this.firstName,

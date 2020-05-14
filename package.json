@@ -1,26 +1,50 @@
 {
-  "name": "server",
+  "name": "node-graphql-boilerplate",
   "version": "0.0.1",
-  "description": "Awesome project developed with TypeORM.",
+  "description": "node graphql boilerplate.",
+  "author": {
+    "email": "mittalmailbox@gmail.com",
+    "name": "AMit Mittal"
+  },
   "devDependencies": {
     "@types/node": "^8.0.29",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
     "ts-loader": "^7.0.4",
     "ts-node": "8.10.0",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "prettier": "^2.0.5"
   },
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/pino": "^6.0.1",
     "apollo-server": "^2.13.1",
     "bcrypt": "^4.0.1",
     "graphql": "^15.0.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.2.0",
+    "pino": "^6.2.1",
     "reflect-metadata": "^0.1.10",
     "typeorm": "0.2.24"
   },
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./src/*.{js,jsx,ts,tsx}": [
+      "npx prettier --write",
+      "eslint src/*.ts --fix-dry-run"
+    ]
   }
 }

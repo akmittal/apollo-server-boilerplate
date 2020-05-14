@@ -1,12 +1,14 @@
 import "reflect-metadata";
-import { createConnection } from "typeorm";
-import { ApolloServer, gql, Request } from "apollo-server";
+import { createConnection, Connection } from "typeorm";
+import { ApolloServer, gql } from "apollo-server";
 import {
   handleUserSignup,
   handleUserLogin,
   handleGetUsers,
   verifyToken,
 } from "./resolvers/user";
+import { Request } from "express";
+import { getLogger } from "./util";
 
 const typeDefs = gql`
   type Query {
@@ -43,12 +45,13 @@ const resolvers = {
 };
 
 createConnection()
-  .then(async (connection) => {
+  .then(async (connection: Connection) => {
     // definition and your set of resolvers.
+    getLogger().info("Connection established", connection.isConnected);
     const server = new ApolloServer({
       typeDefs,
       resolvers,
-      context: async ({ req }: { req: any }) => {
+      context: async ({ req }: { req: Request }): Promise<object> => {
         const authToken = req.headers.authorization || "";
         try {
           const user = await verifyToken(authToken);

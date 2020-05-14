@@ -1,7 +1,7 @@
 import { User } from "./../entity/User";
 import { compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import { getJWTSecret, verifyAuth } from "./../util";
+import { getJWTSecret, verifyAuth, getLogger } from "./../util";
 import { ApolloError, ResolverFn } from "apollo-server";
 
 export const handleUserLogin: ResolverFn = async (
@@ -11,6 +11,7 @@ export const handleUserLogin: ResolverFn = async (
   info
 ) => {
   const { username, password } = args;
+  // getLogger().info({ parent, args, context, info });
   const user = await User.findOne({ where: { username } });
   try {
     if (!user) {
@@ -36,8 +37,9 @@ export const handleUserSignup: ResolverFn = async (
   info
 ) => {
   try {
+    getLogger().info({ parent, args, context, info });
     const { username, password, email, firstName, lastName } = args.user;
-    const user = new User(username, password, email, firstName, lastName );
+    const user = new User(username, password, email, firstName, lastName);
     const r = await user.save();
     return r.toJSON();
   } catch (e) {
@@ -45,7 +47,7 @@ export const handleUserSignup: ResolverFn = async (
   }
 };
 
-export const verifyToken = async (token: string) => {
+export const verifyToken = async (token: string): Promise<unknown> => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, getJWTSecret(), (err: Error, decoded: unknown) => {
       if (err) {
@@ -63,6 +65,7 @@ export const handleGetUsers: ResolverFn = async (
   info
 ) => {
   try {
+    getLogger().info({ parent, args, context, info });
     verifyAuth(context);
     const users = await User.find({});
     return users;
