@@ -4,7 +4,7 @@
 
 
 <p>
-  Electron React Boilerplate uses TypeScript, TypeOrm, Apollo-server, Eslint.
+  Node Graphql Boilerplate uses TypeScript, TypeOrm, Apollo-server, Eslint.
 </p>
 
 <br>
@@ -21,7 +21,7 @@ First, clone the repo via git and install dependencies:
 ```bash
 git clone --depth 1 --single-branch https://github.com/akmittal/node-graphql-starter.git your-project-name
 cd your-project-name
-yarn
+npm start
 ```
 
 ## Starting Development
