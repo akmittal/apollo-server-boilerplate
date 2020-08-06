@@ -2,9 +2,9 @@ import { User } from "./../entity/User";
 import { compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { getJWTSecret, verifyAuth, getLogger } from "./../util";
-import { ApolloError, ResolverFn } from "apollo-server";
+import { ApolloError, IFieldResolver } from "apollo-server";
 
-export const handleUserLogin: ResolverFn = async (
+export const handleUserLogin: IFieldResolver<unknown, unknown> = async (
   parent,
   args,
   context,
@@ -30,7 +30,7 @@ export const handleUserLogin: ResolverFn = async (
   }
 };
 
-export const handleUserSignup: ResolverFn = async (
+export const handleUserSignup: IFieldResolver<unknown, unknown> = async (
   parent,
   args,
   context,
@@ -58,7 +58,7 @@ export const verifyToken = async (token: string): Promise<unknown> => {
   });
 };
 
-export const handleGetUsers: ResolverFn = async (
+export const handleGetUsers: IFieldResolver<unknown, Record<string, Record<string, unknown>>> = async (
   parent,
   args,
   context,
