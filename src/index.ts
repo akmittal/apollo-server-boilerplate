@@ -9,6 +9,7 @@ import {
 } from "./resolvers/user";
 import { Request } from "express";
 import { getLogger } from "./util";
+import { IResolvers } from "graphql-tools";
 
 const typeDefs = gql`
   type Query {
@@ -34,7 +35,7 @@ const typeDefs = gql`
   }
 `;
 
-const resolvers = {
+const resolvers: IResolvers | Array<IResolvers> = {
   Query: {
     login: handleUserLogin,
     users: handleGetUsers,

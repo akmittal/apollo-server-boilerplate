@@ -2,7 +2,8 @@ import { User } from "./../entity/User";
 import { compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { getJWTSecret, verifyAuth, getLogger } from "./../util";
-import { ApolloError, IFieldResolver } from "apollo-server";
+import { ApolloError } from "apollo-server";
+import {IFieldResolver} from "graphql-tools";
 
 export const handleUserLogin: IFieldResolver<unknown, unknown> = async (
   parent,
