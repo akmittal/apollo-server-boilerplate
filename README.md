@@ -1,4 +1,4 @@
-# Node Graphql Boilerplate
+# Apollo Server Boilerplate
 
 
 
@@ -19,16 +19,19 @@
 First, clone the repo via git and install dependencies:
 
 ```bash
-git clone --depth 1 --single-branch https://github.com/akmittal/node-graphql-starter.git your-project-name
+git clone --depth 1 --single-branch https://github.com/akmittal/apollo-server-boilerplate.git your-project-name
 cd your-project-name
-npm start
+npm i
 ```
+Update the connection options in `ormconfig.json`
 
 ## Starting Development
 
 ```bash
-npm i
+npm start
 ```
+
+
 
 
 ## License
